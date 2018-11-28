@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 
-import Title from './Title';
-import Input from './Input';
-import Result from './Result';
+import PizzaCalculator from './PizzaCalculator';
 
-import calculatePizzasNeeded from './lib/calculate-pizzas-needed';
 
 const initialState = {
   numberOfPeople: 10,
@@ -30,33 +27,15 @@ export default class Application extends Component {
 
   render() {
     const { numberOfPeople, slicesPerPerson } = this.state;
-    const numberOfPizzas = calculatePizzasNeeded(
-      numberOfPeople,
-      slicesPerPerson,
-    );
 
     return (
-      <div className="Application">
-        <Title />
-        <Input
-          label="Number of Guests"
-          type="number"
-          min={0}
-          value={numberOfPeople}
-          onChange={this.updateNumberOfPeople}
-        />
-        <Input
-          label="Slices Per Person"
-          type="number"
-          min={0}
-          value={slicesPerPerson}
-          onChange={this.updateSlicesPerPerson}
-        />
-        <Result amount={numberOfPizzas} />
-        <button className="full-width" onClick={this.reset}>
-          Reset
-        </button>
-      </div>
+      <PizzaCalculator
+        numberOfPeople = {numberOfPeople}
+        slicesPerPerson = {slicesPerPerson}
+        updateNumberOfPeople = {this.updateNumberOfPeople}
+        updateSlicesPerPerson = {this.updateSlicesPerPerson}
+        reset = {this.reset}
+      />
     );
   }
 }
